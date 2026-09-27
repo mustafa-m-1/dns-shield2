@@ -1,284 +1,364 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>DNS Shield</title>
+    <title>DNS Shield - إنترنت أنظف وأكثر أمانًا</title>
 
     <style>
+
         * {
             box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
         body {
-            margin: 0;
             font-family: Arial, sans-serif;
-            background: #f8fafc;
-            color: #0f172a;
+            background: #f5f7fb;
+            color: #1f2937;
+            line-height: 1.7;
         }
 
         header {
-            background: #0f172a;
-            color: white;
-            padding: 18px 7%;
+            background: white;
+            border-bottom: 1px solid #e5e7eb;
+            padding: 18px 6%;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: auto;
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            justify-content: space-between;
+            gap: 20px;
         }
 
         .logo {
             font-size: 24px;
             font-weight: bold;
+            color: #2563eb;
+            text-decoration: none;
+        }
+
+        .nav-buttons {
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .login {
-            color: white;
             text-decoration: none;
+            color: #2563eb;
+            font-weight: bold;
+            padding: 10px 18px;
+        }
+
+        .signup {
+            text-decoration: none;
+            background: #2563eb;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 9px;
+            font-weight: bold;
+        }
+
+        .signup:hover {
+            background: #1d4ed8;
         }
 
         .hero {
-            text-align: center;
+            max-width: 1100px;
+            margin: auto;
             padding: 90px 20px 70px;
-            background: white;
+            text-align: center;
         }
 
         .hero h1 {
-            font-size: 42px;
-            margin: 0 0 20px;
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: #111827;
+        }
+
+        .hero h1 span {
+            color: #2563eb;
         }
 
         .hero p {
-            font-size: 20px;
-            color: #64748b;
-            max-width: 650px;
-            margin: auto;
-            line-height: 1.8;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            font-size: 19px;
+            color: #6b7280;
         }
 
-        .button {
+        .hero-button {
             display: inline-block;
-            margin-top: 30px;
-            padding: 15px 35px;
+            text-decoration: none;
             background: #2563eb;
             color: white;
-            text-decoration: none;
+            padding: 15px 30px;
             border-radius: 10px;
             font-size: 18px;
+            font-weight: bold;
+        }
+
+        .hero-button:hover {
+            background: #1d4ed8;
         }
 
         .features {
-            padding: 60px 7%;
-            text-align: center;
-        }
+            max-width: 1100px;
+            margin: auto;
+            padding: 30px 20px 80px;
 
-        .features h2 {
-            font-size: 30px;
-        }
-
-        .cards {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 20px;
-            margin-top: 35px;
         }
 
-        .card {
+        .feature {
             background: white;
-            padding: 30px 20px;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+            padding: 30px;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
         }
 
-        .icon {
-            font-size: 40px;
+        .feature-icon {
+            font-size: 42px;
+            margin-bottom: 15px;
         }
 
-        .card h3 {
-            margin-top: 15px;
+        .feature h2 {
+            margin-bottom: 10px;
+            font-size: 22px;
         }
 
-        .card p {
-            color: #64748b;
-            line-height: 1.7;
+        .feature p {
+            color: #6b7280;
         }
 
         .pricing {
-            background: #eef2ff;
-            padding: 60px 20px;
+            background: white;
+            padding: 70px 20px;
             text-align: center;
         }
 
-        .price {
-            background: white;
-            max-width: 350px;
-            margin: 30px auto;
-            padding: 35px;
-            border-radius: 15px;
+        .pricing h2 {
+            font-size: 34px;
+            margin-bottom: 15px;
         }
 
-        .price strong {
-            display: block;
-            font-size: 35px;
-            margin: 20px 0;
+        .pricing p {
+            color: #6b7280;
+            font-size: 18px;
+        }
+
+        .coming {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 10px 20px;
+            background: #eff6ff;
+            color: #2563eb;
+            border-radius: 30px;
+            font-weight: bold;
         }
 
         footer {
-            background: #0f172a;
-            color: white;
+            background: #111827;
+            color: #d1d5db;
             text-align: center;
-            padding: 25px;
+            padding: 25px 20px;
+        }
+
+        footer strong {
+            color: white;
         }
 
         @media (max-width: 700px) {
-            .cards {
-                grid-template-columns: 1fr;
+
+            nav {
+                flex-direction: column;
+            }
+
+            .nav-buttons {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .hero {
+                padding-top: 60px;
             }
 
             .hero h1 {
-                font-size: 32px;
+                font-size: 36px;
             }
 
-            header {
-                padding: 18px 20px;
+            .hero p {
+                font-size: 17px;
             }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+
         }
+
     </style>
 </head>
 
+
 <body>
+
 
 <header>
 
-    <div class="logo">
-        DNS Shield
-    </div>
+    <nav>
 
-   <a class="login" href="login.html">
-    تسجيل الدخول
-</a>
+        <a class="logo" href="index.html">
+            DNS Shield
+        </a>
+
+
+        <div class="nav-buttons">
+
+            <!-- تسجيل الدخول -->
+            <a class="login" href="login.html">
+                تسجيل الدخول
+            </a>
+
+
+            <!-- إنشاء حساب -->
+            <a class="signup" href="signup.html">
+                إنشاء حساب
+            </a>
+
+        </div>
+
+    </nav>
 
 </header>
+
 
 
 <section class="hero">
 
     <h1>
-        إنترنت أنظف وأكثر أمانًا
+        إنترنت أنظف
+        <span>وأكثر أمانًا</span>
     </h1>
 
     <p>
-        احجب الإعلانات والمواقع الضارة والدومينات التي لا تريد الوصول إليها
-        مباشرة من خلال DNS الخاص بك.
+        DNS Shield يساعدك على حجب الإعلانات
+        والمواقع الضارة وتتبع الإنترنت
+        من خلال DNS سريع وآمن.
     </p>
 
-    <a href="signup.html">
-    ابدأ الآن
-</a>
+
+    <!-- ابدأ الآن -->
+    <a class="hero-button" href="signup.html">
+        ابدأ الآن
+    </a>
 
 </section>
+
 
 
 <section class="features">
 
-    <h2>
-        لماذا DNS Shield؟
-    </h2>
 
-    <div class="cards">
+    <div class="feature">
 
-        <div class="card">
-
-            <div class="icon">
-                🚫
-            </div>
-
-            <h3>
-                حجب الإعلانات
-            </h3>
-
-            <p>
-                تقليل الإعلانات والـ Trackers المعروفة
-                على الأجهزة المتصلة بالشبكة.
-            </p>
-
+        <div class="feature-icon">
+            🛡️
         </div>
 
+        <h2>
+            حماية DNS
+        </h2>
 
-        <div class="card">
-
-            <div class="icon">
-                🛡️
-            </div>
-
-            <h3>
-                حماية DNS
-            </h3>
-
-            <p>
-                حجب الدومينات الضارة والمواقع التي تحددها
-                من لوحة التحكم.
-            </p>
-
-        </div>
-
-
-        <div class="card">
-
-            <div class="icon">
-                ⚡
-            </div>
-
-            <h3>
-                DNS سريع
-            </h3>
-
-            <p>
-                تصميم يعتمد على DNS وCaching بدل تمرير
-                حركة الإنترنت بالكامل عبر خوادمنا.
-            </p>
-
-        </div>
+        <p>
+            حماية اتصالك من العديد من
+            المواقع الضارة والخطيرة.
+        </p>
 
     </div>
 
+
+
+    <div class="feature">
+
+        <div class="feature-icon">
+            🚫
+        </div>
+
+        <h2>
+            حجب الإعلانات
+        </h2>
+
+        <p>
+            تقليل الإعلانات والنطاقات
+            المزعجة أثناء استخدام الإنترنت.
+        </p>
+
+    </div>
+
+
+
+    <div class="feature">
+
+        <div class="feature-icon">
+            ⚡
+        </div>
+
+        <h2>
+            سرعة وأداء
+        </h2>
+
+        <p>
+            تصميم الخدمة ليكون تأثيرها
+            على سرعة الإنترنت منخفضًا.
+        </p>
+
+    </div>
+
+
 </section>
+
 
 
 <section class="pricing">
 
     <h2>
-        خطتك
+        الخطط والأسعار
     </h2>
 
-    <div class="price">
+    <p>
+        خطط الاشتراك في DNS Shield ستكون متاحة قريبًا.
+    </p>
 
-        <h3>
-            DNS Shield
-        </h3>
-
-        <strong>
-            قريبًا
-        </strong>
-
-        <p>
-            اشتراكات شهرية وسنوية
-        </p>
-
-       <a class="button" href="signup.html">
-    ابدأ الآن
-</a>
-
+    <div class="coming">
+        قريبًا
     </div>
 
 </section>
 
 
+
 <footer>
 
-    DNS Shield © 2026
+    <p>
+        © 2026
+        <strong>DNS Shield</strong>
+        - جميع الحقوق محفوظة
+    </p>
 
 </footer>
 
+
 </body>
+
 </html>

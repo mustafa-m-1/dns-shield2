@@ -637,7 +637,65 @@
 
         </section>
 
+<!-- Blocklist -->
 
+<section class="dns-section">
+
+    <h2>
+        قائمة حظر المواقع
+    </h2>
+
+    <p>
+        أضف النطاقات التي تريد حظرها على أجهزتك.
+    </p>
+
+    <div style="display:flex; gap:10px; margin-bottom:20px; flex-wrap:wrap;">
+
+        <input
+            type="text"
+            id="domainInput"
+            placeholder="مثال: ads.example.com"
+            style="
+                flex:1;
+                min-width:250px;
+                padding:12px;
+                border:1px solid #d1d5db;
+                border-radius:10px;
+                font-size:16px;
+            "
+        >
+
+        <button
+            id="addDomainButton"
+            style="
+                padding:12px 20px;
+                border:none;
+                border-radius:10px;
+                background:#2563eb;
+                color:white;
+                font-weight:bold;
+                cursor:pointer;
+            "
+        >
+            إضافة
+        </button>
+
+    </div>
+
+    <div id="blocklistMessage"
+         style="
+            margin-bottom:15px;
+            font-weight:bold;
+         ">
+    </div>
+
+    <div id="blocklist">
+
+        جاري تحميل قائمة الحظر...
+
+    </div>
+
+</section>
 
         <!-- Account -->
 

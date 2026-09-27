@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <title>تسجيل الدخول - DNS Shield</title>
 
     <style>
+
         * {
             box-sizing: border-box;
         }
@@ -16,7 +18,9 @@
             font-family: Arial, sans-serif;
             background: #f5f7fb;
             color: #1f2937;
+
             min-height: 100vh;
+
             display: flex;
             justify-content: center;
             align-items: center;
@@ -30,9 +34,13 @@
 
         .card {
             background: white;
+
             padding: 30px;
+
             border-radius: 18px;
-            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.08);
+
+            box-shadow:
+                0 10px 35px rgba(0, 0, 0, 0.08);
         }
 
         h1 {
@@ -48,32 +56,47 @@
 
         label {
             display: block;
+
             margin-bottom: 7px;
+
             font-weight: bold;
         }
 
         input {
             width: 100%;
+
             padding: 13px;
+
             margin-bottom: 17px;
+
             border: 1px solid #d1d5db;
+
             border-radius: 10px;
+
             font-size: 16px;
         }
 
         input:focus {
             outline: none;
+
             border-color: #2563eb;
         }
 
         button {
             width: 100%;
+
             padding: 14px;
+
             border: none;
+
             border-radius: 10px;
+
             background: #2563eb;
+
             color: white;
+
             font-size: 17px;
+
             cursor: pointer;
         }
 
@@ -83,12 +106,15 @@
 
         button:disabled {
             background: #9ca3af;
+
             cursor: not-allowed;
         }
 
         #message {
             margin-top: 18px;
+
             text-align: center;
+
             line-height: 1.7;
         }
 
@@ -102,31 +128,45 @@
 
         .links {
             text-align: center;
+
             margin-top: 20px;
         }
 
         .links a {
             color: #2563eb;
+
             text-decoration: none;
         }
+
     </style>
+
 </head>
 
+
 <body>
+
 
 <div class="container">
 
     <div class="card">
 
-        <h1>تسجيل الدخول</h1>
+        <h1>
+            تسجيل الدخول
+        </h1>
+
 
         <p class="subtitle">
             مرحبًا بك في DNS Shield
         </p>
 
+
         <form id="loginForm">
 
-            <label for="email">البريد الإلكتروني</label>
+
+            <label for="email">
+                البريد الإلكتروني
+            </label>
+
 
             <input
                 type="email"
@@ -135,7 +175,11 @@
                 required
             >
 
-            <label for="password">كلمة المرور</label>
+
+            <label for="password">
+                كلمة المرور
+            </label>
+
 
             <input
                 type="password"
@@ -144,76 +188,143 @@
                 required
             >
 
-            <button type="submit" id="loginButton">
+
+            <button
+                type="submit"
+                id="loginButton"
+            >
                 تسجيل الدخول
             </button>
 
+
         </form>
+
 
         <div id="message"></div>
 
+
         <div class="links">
-            <a href="signup.html">ليس لديك حساب؟ إنشاء حساب</a>
-            <br><br>
-            <a href="index.html">العودة إلى الصفحة الرئيسية</a>
+
+            <a href="signup.html">
+                ليس لديك حساب؟ إنشاء حساب
+            </a>
+
+            <br>
+            <br>
+
+            <a href="index.html">
+                العودة إلى الصفحة الرئيسية
+            </a>
+
         </div>
+
 
     </div>
 
 </div>
 
 
-<!-- مكتبة Supabase -->
+
+<!-- Supabase -->
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 
 <script>
 
-    const SUPABASE_URL =
-        "https://lrqoxcawphwfuprnrhgv.supabase.co";
 
-    const SUPABASE_PUBLISHABLE_KEY =
-        "sb_publishable_aqDNj0IN8UpTLSKMLS8qZQ_qTuBqPMV";
+/*
+==================================================
+بيانات Supabase
+==================================================
+*/
 
-
-    const { createClient } = supabase;
-
-    const db = createClient(
-        SUPABASE_URL,
-        SUPABASE_PUBLISHABLE_KEY
-    );
+const SUPABASE_URL =
+    "https://lrqoxcawphwfuprnrhgv.supabase.co";
 
 
-    const form =
-        document.getElementById("loginForm");
-
-    const message =
-        document.getElementById("message");
-
-    const button =
-        document.getElementById("loginButton");
+const SUPABASE_PUBLISHABLE_KEY =
+    "sb_publishable_aqDNj0IN8UpTLSKMLS8qZQ_qTuBqPMV";
 
 
-    form.addEventListener("submit", async function(event) {
+/*
+==================================================
+إنشاء اتصال Supabase
+==================================================
+*/
+
+const { createClient } = supabase;
+
+
+const db = createClient(
+    SUPABASE_URL,
+    SUPABASE_PUBLISHABLE_KEY
+);
+
+
+/*
+==================================================
+عناصر الصفحة
+==================================================
+*/
+
+const form =
+    document.getElementById("loginForm");
+
+
+const message =
+    document.getElementById("message");
+
+
+const button =
+    document.getElementById("loginButton");
+
+
+/*
+==================================================
+تسجيل الدخول
+==================================================
+*/
+
+form.addEventListener(
+    "submit",
+    async function(event) {
 
         event.preventDefault();
 
 
         const email =
-            document.getElementById("email").value.trim();
+            document
+            .getElementById("email")
+            .value
+            .trim();
+
 
         const password =
-            document.getElementById("password").value;
+            document
+            .getElementById("password")
+            .value;
 
+
+        /*
+        تعطيل الزر أثناء تسجيل الدخول
+        */
 
         button.disabled = true;
 
         button.textContent =
             "جاري تسجيل الدخول...";
 
+
         message.textContent = "";
 
 
         try {
+
+
+            /*
+            تسجيل الدخول من Supabase
+            */
 
             const { data, error } =
                 await db.auth.signInWithPassword({
@@ -225,6 +336,10 @@
                 });
 
 
+            /*
+            إذا حدث خطأ
+            */
+
             if (error) {
 
                 throw error;
@@ -232,39 +347,68 @@
             }
 
 
-            message.className = "success";
-
-message.textContent =
-    "تم تسجيل الدخول بنجاح.";
-
-setTimeout(function() {
-    window.location.href = "dashboard.html";
-}, 1000);
-
             /*
-             * مؤقتًا سنبقى في الصفحة.
-             * في الخطوة القادمة سننشئ لوحة التحكم.
-             */
+            تسجيل الدخول نجح
+            */
 
+            message.className =
+                "success";
 
-        } catch (error) {
-
-            message.className = "error";
 
             message.textContent =
-                "خطأ: " + error.message;
+                "تم تسجيل الدخول بنجاح.";
+
+
+            /*
+            الانتقال إلى لوحة التحكم
+            */
+
+            setTimeout(function() {
+
+                window.location.href =
+                    "dashboard.html";
+
+            }, 800);
+
 
         }
 
 
-        button.disabled = false;
+        catch (error) {
 
-        button.textContent =
-            "تسجيل الدخول";
 
-    });
+            /*
+            عرض الخطأ
+            */
+
+            message.className =
+                "error";
+
+
+            message.textContent =
+                "خطأ: " + error.message;
+
+
+            /*
+            إعادة تفعيل الزر
+            */
+
+            button.disabled = false;
+
+
+            button.textContent =
+                "تسجيل الدخول";
+
+        }
+
+    }
+
+);
+
 
 </script>
 
+
 </body>
+
 </html>

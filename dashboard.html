@@ -809,7 +809,15 @@ const { data: subscription, error: subscriptionError } = await db
     .select("plan, status, started_at, expires_at")
     .eq("user_id", user.id)
     .single();
+    
+const { data: dnsConfig, error: dnsError } = await db
+    .from("dns_configs")
+    .select("status, dns_ipv4_primary, dns_ipv4_secondary")
+    .eq("user_id", user.id)
+    .single();
 
+console.log("DNS Config:", dnsConfig);
+console.log("DNS Error:", dnsError);
 if (subscriptionError) {
     console.error("Subscription error:", subscriptionError);
 }

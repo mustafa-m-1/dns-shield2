@@ -234,9 +234,12 @@
 
             message.className = "success";
 
-            message.textContent =
-                "تم تسجيل الدخول بنجاح.";
+message.textContent =
+    "تم تسجيل الدخول بنجاح.";
 
+setTimeout(function() {
+    window.location.href = "dashboard.html";
+}, 1000);
 
             /*
              * مؤقتًا سنبقى في الصفحة.

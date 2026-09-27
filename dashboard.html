@@ -677,15 +677,27 @@
 
             <div class="account-row">
 
-                <span class="account-label">
-                    حالة الحساب
-                </span>
+    <span class="account-label">
+        حالة الحساب
+    </span>
 
-                <strong class="active">
-                    نشط
-                </strong>
+    <strong class="active" id="subscriptionStatus">
+        جاري التحميل...
+    </strong>
 
-            </div>
+</div>
+
+<div class="account-row">
+
+    <span class="account-label">
+        بداية الاشتراك
+    </span>
+
+    <strong id="subscriptionStart">
+        جاري التحميل...
+    </strong>
+
+</div>
 
 
         </section>
@@ -791,7 +803,16 @@ const { data: profile, error: profileError } = await db
     .select("full_name, email, plan, subscription_status")
     .eq("user_id", user.id)
     .single();
+    
+const { data: subscription, error: subscriptionError } = await db
+    .from("subscriptions")
+    .select("plan, status, started_at, expires_at")
+    .eq("user_id", user.id)
+    .single();
 
+if (subscriptionError) {
+    console.error("Subscription error:", subscriptionError);
+}
 if (profileError) {
     console.error("Profile error:", profileError);
 }
@@ -832,6 +853,31 @@ document.getElementById(
     profile?.plan === "free"
         ? "الخطة المجانية"
         : profile?.plan || "غير محدد";
+
+    document.getElementById(
+    "subscriptionStatus"
+).textContent =
+    subscription?.status === "active"
+        ? "نشط"
+        : subscription?.status || "غير محدد";
+
+    if (subscription?.started_at) {
+
+    const startDate =
+        new Date(subscription.started_at);
+
+    document.getElementById(
+        "subscriptionStart"
+    ).textContent =
+        startDate.toLocaleString("ar-EG");
+
+} else {
+
+    document.getElementById(
+        "subscriptionStart"
+    ).textContent =
+        "غير محدد";
+}
     /*
     إظهار لوحة التحكم
     */

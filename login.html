@@ -351,24 +351,13 @@ form.addEventListener(
             تسجيل الدخول نجح
             */
 
-            message.className =
-                "success";
+           message.className =
+    "success";
 
+message.textContent =
+    "تم تسجيل الدخول بنجاح.";
 
-            message.textContent =
-                "تم تسجيل الدخول بنجاح.";
-
-
-            /*
-            الانتقال إلى لوحة التحكم
-            */
-
-            setTimeout(function() {
-
-                window.location.href =
-                    "dashboard.html";
-
-            }, 800);
+window.location.assign("dashboard.html");
 
 
         }

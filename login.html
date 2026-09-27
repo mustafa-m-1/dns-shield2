@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>تسجيل الدخول - DNS Shield</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f5f7fb;
+            color: #1f2937;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 430px;
+            padding: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 18px;
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.08);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #6b7280;
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 7px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 13px;
+            margin-bottom: 17px;
+            border: 1px solid #d1d5db;
+            border-radius: 10px;
+            font-size: 16px;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #2563eb;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 10px;
+            background: #2563eb;
+            color: white;
+            font-size: 17px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+        }
+
+        button:disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+        }
+
+        #message {
+            margin-top: 18px;
+            text-align: center;
+            line-height: 1.7;
+        }
+
+        .success {
+            color: #15803d;
+        }
+
+        .error {
+            color: #dc2626;
+        }
+
+        .links {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .links a {
+            color: #2563eb;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="card">
+
+        <h1>تسجيل الدخول</h1>
+
+        <p class="subtitle">
+            مرحبًا بك في DNS Shield
+        </p>
+
+        <form id="loginForm">
+
+            <label for="email">البريد الإلكتروني</label>
+
+            <input
+                type="email"
+                id="email"
+                placeholder="example@email.com"
+                required
+            >
+
+            <label for="password">كلمة المرور</label>
+
+            <input
+                type="password"
+                id="password"
+                placeholder="كلمة المرور"
+                required
+            >
+
+            <button type="submit" id="loginButton">
+                تسجيل الدخول
+            </button>
+
+        </form>
+
+        <div id="message"></div>
+
+        <div class="links">
+            <a href="signup.html">ليس لديك حساب؟ إنشاء حساب</a>
+            <br><br>
+            <a href="index.html">العودة إلى الصفحة الرئيسية</a>
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- مكتبة Supabase -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+
+    const SUPABASE_URL =
+        "https://lrqoxcawphwfuprnrhgv.supabase.co";
+
+    const SUPABASE_PUBLISHABLE_KEY =
+        "sb_publishable_aqDNj0IN8UpTLSKMLS8qZQ_qTuBqPMV";
+
+
+    const { createClient } = supabase;
+
+    const db = createClient(
+        SUPABASE_URL,
+        SUPABASE_PUBLISHABLE_KEY
+    );
+
+
+    const form =
+        document.getElementById("loginForm");
+
+    const message =
+        document.getElementById("message");
+
+    const button =
+        document.getElementById("loginButton");
+
+
+    form.addEventListener("submit", async function(event) {
+
+        event.preventDefault();
+
+
+        const email =
+            document.getElementById("email").value.trim();
+
+        const password =
+            document.getElementById("password").value;
+
+
+        button.disabled = true;
+
+        button.textContent =
+            "جاري تسجيل الدخول...";
+
+        message.textContent = "";
+
+
+        try {
+
+            const { data, error } =
+                await db.auth.signInWithPassword({
+
+                    email: email,
+
+                    password: password
+
+                });
+
+
+            if (error) {
+
+                throw error;
+
+            }
+
+
+            message.className = "success";
+
+            message.textContent =
+                "تم تسجيل الدخول بنجاح.";
+
+
+            /*
+             * مؤقتًا سنبقى في الصفحة.
+             * في الخطوة القادمة سننشئ لوحة التحكم.
+             */
+
+
+        } catch (error) {
+
+            message.className = "error";
+
+            message.textContent =
+                "خطأ: " + error.message;
+
+        }
+
+
+        button.disabled = false;
+
+        button.textContent =
+            "تسجيل الدخول";
+
+    });
+
+</script>
+
+</body>
+</html>
